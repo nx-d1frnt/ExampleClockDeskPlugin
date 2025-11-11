@@ -48,8 +48,8 @@ class ExampleChipReceiver : BroadcastReceiver() {
                     Thread.sleep(1000) // Simulate network delay
                     val Text = "Smart chip plugin test"
 
-                    // This icon name must match a drawable in *this plugin's* res/drawable/
-                    // e.g., res/drawable/ic_weather_sunny.xml
+                    // This icon name must match a drawable in this plugins res/drawable/
+                    // e.g., res/drawable/ic_android_black.xml
                     val IconName = "ic_android_black"
 
                     // -----------------------------------------------------
@@ -61,9 +61,11 @@ class ExampleChipReceiver : BroadcastReceiver() {
 
                         // Add the required data as extras
                         // plugin_package_name tells ClockDesk which plugin this data is from
+                        putExtra("chip_visible", true) // Whether to show or hide the chip
                         putExtra("plugin_package_name", context.packageName)
                         putExtra("chip_text", Text)
                         putExtra("chip_icon_name", IconName)
+                        putExtra("chip_click_activity", ".ExamplePluginDetailsActivity") // The activity to open on click
                     }
 
                     context.sendBroadcast(responseIntent)

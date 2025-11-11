@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExampleClockDeskPlugin" >
 
+        <activity
+            android:name=".ExamplePluginDetailsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Dialog.Alert" />
+
         <receiver
             android:name=".ExampleChipReceiver"
             android:exported="true">
