@@ -22,14 +22,6 @@ class ExampleChipReceiver : BroadcastReceiver() {
         if (intent.action == ACTION_REQUEST_DATA) {
             Log.d("ExampleChipReceiver", "Received data request from ClockDesk")
 
-            // Get the location provided by ClockDesk, if available
-            val location = intent.getParcelableExtra<Location>("location")
-            if (location != null) {
-                Log.d("ExampleChipReceiver", "Received location: ${location.latitude}, ${location.longitude}")
-            } else {
-                Log.w("ExampleChipReceiver", "Location data was null")
-            }
-
             // Use goAsync() to perform work on a background thread
             // A BroadcastReceiver's onReceive() has a 10-second limit on the main thread
             val pendingResult = goAsync()
