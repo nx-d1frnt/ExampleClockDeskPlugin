@@ -15,7 +15,7 @@
         <activity
             android:name=".ExamplePluginDetailsActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Dialog.Alert" />
+            android:theme="@style/Theme.ExampleClockDeskPlugin.Dialog" />
 
         <receiver
             android:name=".ExampleChipReceiver"
