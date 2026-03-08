@@ -13,7 +13,7 @@ With this architecture, developers can create and distribute plugins as standard
 
 2. **Metadata**  
    ClockDesk reads the meta-data from your `AndroidManifest.xml` to locate your `plugin_info.xml` file.  
-   This file provides the plugin’s name (e.g., *Weather Plugin*) for ClockDesk’s settings.
+   This file provides the plugin’s name, description, icon, and optional settings activity for ClockDesk’s settings.
 
 3. **User Enablement**  
    The user enables your plugin in ClockDesk’s settings.
@@ -31,11 +31,14 @@ With this architecture, developers can create and distribute plugins as standard
     app/ 
     ├── src/main/
     │ 
-    ├── AndroidManifest.xml # Declares the plugin receiver and activity 
+    ├── AndroidManifest.xml # Declares the plugin receiver and activities
     │ ├── java/com/nxd1frnt/exampleclockdeskplugin/ 
     │ │ ├── ExampleChipReceiver.kt # Handles data requests and responses 
-    │ │ └── ExamplePluginDetailsActivity.kt # Simple activity opened when chip is clicked
-    │ ├── res/layout/activity_plugin_details.xml # UI layout for details activity
+    │ │ ├── ExamplePluginDetailsActivity.kt # Activity opened when chip is clicked
+    │ │ └── SettingsActivity.kt # Activity for plugin-specific settings
+    │ ├── res/layout/
+    │ │ ├── activity_plugin_details.xml # UI layout for details activity
+    │ │ └── activity_plugin_settings.xml # UI layout for settings activity
     │ └── res/xml/plugin_info.xml # Metadata for ClockDesk settings
 
 
@@ -44,7 +47,7 @@ With this architecture, developers can create and distribute plugins as standard
 ## 🛠️ Key Components
 
 ### 1. `AndroidManifest.xml`
-Declares the plugin receiver and activity:
+Declares the plugin receiver and activities:
 
 ```xml
 <receiver
@@ -63,6 +66,10 @@ Declares the plugin receiver and activity:
         android:name="com.nxd1frnt.clockdesk2.smartchip.PLUGIN_RECEIVER"
         android:resource="@xml/plugin_info" />
 </receiver>
+
+<activity
+    android:name=".SettingsActivity"
+    android:exported="true" />
 ```
 
 ### 2. `plugin_info.xml`
@@ -72,14 +79,16 @@ Provides metadata for ClockDesk’s settings screen:
 <smart-chip-plugin
     xmlns:android="http://schemas.android.com/apk/res/android"
     preferenceKey="show_example_plugin"
-    displayName="Example Plugin"
-    priority="5"/>
+    displayName="@string/plugin_name"
+    description="@string/plugin_description"
+    icon="@drawable/ic_android_black"
+    settingsActivity=".SettingsActivity" />
 ```
 
 ### 3. `ExampleChipReceiver.kt`
 Handles data requests and sends responses back to ClockDesk:
 
-```xml
+```kotlin
 val responseIntent = Intent(ACTION_UPDATE_DATA).apply {
     setPackage(CLOCKDESK_PACKAGE)
     putExtra("chip_visible", true)
@@ -91,8 +100,11 @@ val responseIntent = Intent(ACTION_UPDATE_DATA).apply {
 context.sendBroadcast(responseIntent)
 ```
 
-### 4. `ExamplePluginDetailsActivity.kt`
-A simple optional activity that opens when the chip is clicked
+### 4. `SettingsActivity.kt`
+An optional activity that allows users to configure your plugin. It can be launched directly from ClockDesk's settings.
+
+### 5. `ExamplePluginDetailsActivity.kt`
+A simple optional activity that opens when the chip is clicked.
 
 ## 🧪 Testing Your Plugin
 
