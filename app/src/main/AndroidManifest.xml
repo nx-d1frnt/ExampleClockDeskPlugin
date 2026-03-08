@@ -17,6 +17,12 @@
             android:exported="true"
             android:theme="@style/Theme.ExampleClockDeskPlugin.Dialog" />
 
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ExampleClockDeskPlugin.Dialog" />
+
+
         <receiver
             android:name=".ExampleChipReceiver"
             android:exported="true">
