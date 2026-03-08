@@ -2,4 +2,5 @@
     <string name="app_name">Example ClockDesk Plugin</string>
     <string name="plugin_name">Example ClockDesk Plugin</string>
     <string name="plugin_description">This is an example ClockDesk plugin.</string>
+    <string name="settings_title">Example Settings activity</string>
 </resources>

@@ -6,6 +6,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
@@ -18,22 +19,11 @@ class SettingsActivity: AppCompatActivity() {
         val surfaceColor = getColor(R.color.md_theme_surface)
 
         super.onCreate(savedInstanceState)
-        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                )
         setContentView(R.layout.activity_plugin_settings)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { finish() }
 
-        val closeButton = findViewById<Button>(R.id.close_button)
-        closeButton.setOnClickListener { finish() }
-        val rootScrim = findViewById<android.view.View>(R.id.root_scrim)
-        rootScrim.setOnClickListener {
-            finish()
-        }
     }
 }
