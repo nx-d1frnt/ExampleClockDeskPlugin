@@ -18,8 +18,9 @@ class ExampleChipReceiver : BroadcastReceiver() {
 
         private val chipTexts = listOf(
             "Hello!",
-            "So smart",
-            "Such a smart chip",
+            "Welcome to ClockDesk!",
+            "This is an example plugin",
+            "You can write your own plugins!",
             "Well, bye!"
         )
         private var currentTextIndex = 0

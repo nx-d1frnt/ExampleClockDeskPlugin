@@ -129,3 +129,43 @@ Wait for ClockDesk’s refresh cycle or force one if available.
 Use Logcat to monitor your plugin’s logs. Filter by `ExampleChipReceiver` to verify data requests and responses.
 
 #### Use this repo as a template to build your own SmartChips plugin with custom data sources (weather, stocks, reminders, etc.).
+
+---
+
+# 🎨 Example ClockDesk Background Provider Plugin
+
+ClockDesk supports external **Background Provider plugins**. These plugins provide dynamic background colors, gradients, or image URIs for ClockDesk to render seamlessly using its GLSL engine.
+
+## 🚀 How Background Plugins Work
+
+1. **Discovery (`ACTION_QUERY_BACKGROUND_PLUGINS`)**
+   ClockDesk queries the system for receivers listening for `com.nxd1frnt.clockdesk2.ACTION_QUERY_BACKGROUND_PLUGINS`.
+
+2. **Metadata (`@xml/background_plugin_info`)**
+   Your receiver declares a `<meta-data>` entry with `name="com.nxd1frnt.clockdesk2.background.PLUGIN_RECEIVER"`. ClockDesk reads:
+   - `id`: Unique identifier for the provider (e.g. `example_palette`).
+   - `displayName`: Label displayed on provider card.
+   - `description`: Explanatory text in the plugin settings screen.
+   - `settingsActivity`: Optional activity launched via in-card settings cog.
+   - `supportsBlur`, `supportsCrop`, `supportsWeather`, `supportsDimming`: Capability flags.
+
+3. **Data Request (`ACTION_REQUEST_BACKGROUND_DATA`)**
+   Sent by ClockDesk when the provider is selected or when a refresh is requested.
+
+4. **Data Response (`ACTION_UPDATE_BACKGROUND_DATA`)**
+   Your plugin broadcasts back:
+   ```kotlin
+   val intent = Intent("com.nxd1frnt.clockdesk2.ACTION_UPDATE_BACKGROUND_DATA").apply {
+       setPackage("com.nxd1frnt.clockdesk2")
+       putExtra("plugin_id", "example_palette")
+       putExtra("plugin_package_name", context.packageName)
+       putExtra("color", selectedColorInt) // Or putExtra("image_uri", "content://...")
+   }
+   context.sendBroadcast(intent)
+   ```
+
+## 🛠️ Components in this Repository
+
+- **`ExampleBackgroundReceiver.kt`**: Responds to discovery & data requests; broadcasts color palette updates.
+- **`BackgroundSettingsActivity.kt`**: Material 3 settings screen with palette swatches (Nordic Emerald, Deep Indigo, Cyber Cyan, etc.).
+- **`res/xml/background_plugin_info.xml`**: Declarative plugin descriptor.

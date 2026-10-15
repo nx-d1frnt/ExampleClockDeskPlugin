@@ -3,4 +3,18 @@
     <string name="plugin_name">Example ClockDesk Plugin</string>
     <string name="plugin_description">This is an example ClockDesk plugin.</string>
     <string name="settings_title">Example Settings activity</string>
+
+    <!-- Background Provider Plugin Strings -->
+    <string name="bg_plugin_name">Palette Pro (Plugin)</string>
+    <string name="bg_plugin_description">External plugin delivering dynamic designer color palettes.</string>
+    <string name="bg_settings_title">Palette Pro Settings</string>
+    <string name="bg_settings_subtitle">Select an ambient background tone for ClockDesk:</string>
+    <string name="bg_color_emerald">Nordic Emerald</string>
+    <string name="bg_color_indigo">Deep Indigo</string>
+    <string name="bg_color_amber">Amber Dusk</string>
+    <string name="bg_color_crimson">Velvet Crimson</string>
+    <string name="bg_color_cyan">Cyber Cyan</string>
+    <string name="bg_color_midnight">Midnight Slate</string>
+    <string name="bg_color_amoled">Pure AMOLED</string>
+    <string name="bg_apply_toast">Background updated in ClockDesk!</string>
 </resources>

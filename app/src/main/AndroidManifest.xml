@@ -45,5 +45,31 @@
                 android:name="com.nxd1frnt.clockdesk2.smartchip.PLUGIN_RECEIVER"
                 android:resource="@xml/plugin_info" />
         </receiver>
-</application>
+
+        <!-- Background Provider Plugin Receiver -->
+        <receiver
+            android:name=".ExampleBackgroundReceiver"
+            android:exported="true">
+
+            <!-- ClockDesk background plugin discovery -->
+            <intent-filter>
+                <action android:name="com.nxd1frnt.clockdesk2.ACTION_QUERY_BACKGROUND_PLUGINS" />
+            </intent-filter>
+
+            <!-- ClockDesk background data request -->
+            <intent-filter>
+                <action android:name="com.nxd1frnt.clockdesk2.ACTION_REQUEST_BACKGROUND_DATA" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.nxd1frnt.clockdesk2.background.PLUGIN_RECEIVER"
+                android:resource="@xml/background_plugin_info" />
+        </receiver>
+
+        <!-- Background Provider Plugin Settings -->
+        <activity
+            android:name=".BackgroundSettingsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.ExampleClockDeskPlugin.Settings" />
+    </application>
 </manifest>
