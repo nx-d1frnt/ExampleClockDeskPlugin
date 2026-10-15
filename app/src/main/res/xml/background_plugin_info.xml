@@ -4,7 +4,7 @@
     id="example_palette"
     displayName="@string/bg_plugin_name"
     description="@string/bg_plugin_description"
-    settingsActivity=".BackgroundSettingsActivity"
+    settingsActivity="com.nxd1frnt.exampleclockdeskplugin.BackgroundSettingsActivity"
     supportsBlur="false"
     supportsCrop="false"
     supportsWeather="true"
